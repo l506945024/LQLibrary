@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.lq.lib.util.ActivityUtil;
+import com.lq.lib.util.ToastUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -99,6 +101,24 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void finishActivity(Class<?> cls) {
         ActivityUtil.getActivityUtil().finishActivity(cls);
+    }
+
+    /**
+     * 显示较短的吐司
+     *
+     * @param msg
+     */
+    public void showToastShort(String msg) {
+        ToastUtil.INSTANCE.showToastShort(this, msg);
+    }
+
+    /**
+     * 显示稍长吐司
+     *
+     * @param msg
+     */
+    public void showToastLong(String msg) {
+        ToastUtil.INSTANCE.showToastLong(this, msg);
     }
 
     //============MainActivity双击退出页面代码开始========//
