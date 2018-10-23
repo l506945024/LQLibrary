@@ -10,3 +10,11 @@
 
                     }
                 });
+apk更新实例:
+  if (mUpdateManager == null) {
+            mUpdateManager = new AppUpdateManager(this);
+        }
+        if (downId != 0) {
+            mUpdateManager.clearCurrentTask(downId);
+        }
+        downId = mUpdateManager.updateApkWifi(downUrl, "靓才", "更新中...");

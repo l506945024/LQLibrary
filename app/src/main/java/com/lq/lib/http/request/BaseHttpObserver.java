@@ -1,8 +1,10 @@
 package com.lq.lib.http.request;
 
 import android.app.Dialog;
+import android.content.Context;
 
 import com.google.gson.JsonParseException;
+import com.lq.lib.http.RxRequestManager;
 
 import org.json.JSONException;
 
@@ -23,11 +25,19 @@ import retrofit2.HttpException;
  */
 public abstract class BaseHttpObserver<T extends BaseHttpResult> implements Observer<T>, IBaseHttpResultListener {
     Dialog loadingDialog;
+    Object requestTag;
+    Context mContext;
+    boolean showLoadingDialog;
 
+    public BaseHttpObserver(Context context, boolean showLoadingDialog, Object tag) {
+        this.mContext = context;
+        this.showLoadingDialog = showLoadingDialog;
+        this.requestTag = tag;
+    }
 
     @Override
     public void onSubscribe(Disposable d) {
-
+        RxRequestManager.getInstance().add(d, requestTag);
     }
 
     @Override
@@ -61,7 +71,7 @@ public abstract class BaseHttpObserver<T extends BaseHttpResult> implements Obse
 
     @Override
     public void onComplete() {
-
+        RxRequestManager.getInstance().remove(requestTag);
     }
 
     @Override

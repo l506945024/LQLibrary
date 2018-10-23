@@ -1,14 +1,10 @@
 package com.lq.lib.base;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
-import android.widget.Toast;
 
-import com.lq.lib.util.ActivityUtil;
+import com.lq.lib.util.ActivityManager;
 import com.lq.lib.util.ToastUtil;
 
 import butterknife.ButterKnife;
@@ -32,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId(savedInstanceState));
         //ButterKnife初始化
         mUnbinder = ButterKnife.bind(this);
-        ActivityUtil.getActivityUtil().addActivity(this);
+        ActivityManager.getActivityUtil().addActivity(this);
         initView(savedInstanceState);
         initTitleBar(savedInstanceState);
         initData(savedInstanceState);
@@ -81,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         //解除绑定，官方文档只对fragment做了解绑
         mUnbinder.unbind();
-        ActivityUtil.getActivityUtil().finishActivity(this);
+        ActivityManager.getActivityUtil().finishActivity(this);
 
         super.onDestroy();
     }
@@ -90,7 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 关闭当前页面
      */
     public void finishActivity() {
-        ActivityUtil.getActivityUtil().finishActivity(this);
+        ActivityManager.getActivityUtil().finishActivity(this);
         finish();
     }
 
@@ -100,7 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param cls
      */
     public void finishActivity(Class<?> cls) {
-        ActivityUtil.getActivityUtil().finishActivity(cls);
+        ActivityManager.getActivityUtil().finishActivity(cls);
     }
 
     /**
