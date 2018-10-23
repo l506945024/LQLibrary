@@ -23,6 +23,8 @@ public enum ToastUtil {
         } else {
             mToast.setText(msg);
         }
+
+
         mToast.show();
     }
 
