@@ -11,23 +11,23 @@ import java.util.Stack;
  *
  * @author xhh
  */
-public class ActivityUtil {
+public class ActivityManager {
 
     private static Stack<Activity> activityStack;
-    private static ActivityUtil instance;
+    private static ActivityManager instance;
 
-    private ActivityUtil() {
+    private ActivityManager() {
 
     }
 
     /**
      * 单一实例
      */
-    public static ActivityUtil getActivityUtil() {
+    public static ActivityManager getActivityUtil() {
         if (instance == null) {
-            synchronized (ActivityUtil.class) {
+            synchronized (ActivityManager.class) {
                 if (instance == null) {
-                    instance = new ActivityUtil();
+                    instance = new ActivityManager();
                 }
             }
         }
