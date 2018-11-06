@@ -30,36 +30,6 @@ public class Api {
     private static Api ourInstance;
     private static Application sContext;
     private static String sBaseUrl = "";
-    /**
-     * 默认的超时时间
-     */
-    public static final int DEFAULT_TIMEOUT_MILLISECONDS = 15000;
-    /**
-     * 默认重试次数
-     */
-    public static final int DEFAULT_RETRY_COUNT = 0;
-    /**
-     * 默认重试叠加时间
-     */
-    public static final int DEFAULT_RETRY_INCREASE_DELAY = 0;
-    /**
-     * 默认重试延时
-     */
-    public static final int DEFAULT_RETRY_DELAY = 500;
-
-    //======请求重试=====//
-    /**
-     * 重试次数默认3次
-     */
-    private int mRetryCount = DEFAULT_RETRY_COUNT;
-    /**
-     * 延迟xxms重试
-     */
-    private int mRetryDelay = DEFAULT_RETRY_DELAY;
-    /**
-     * 叠加延迟
-     */
-    private int mRetryIncreaseDelay = DEFAULT_RETRY_INCREASE_DELAY;
 
     /**
      * okHttp请求的客户端
@@ -84,38 +54,16 @@ public class Api {
     }
 
     private Api() {
-        //拦截器
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        HttpNetWorkInterceptor netWorkInterceptor = new HttpNetWorkInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        mOkHttpClientBuilder = new OkHttpClient.Builder();
-        mOkHttpClientBuilder.hostnameVerifier(new DefaultHostnameVerifier())
-                .connectTimeout(DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .readTimeout(DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .writeTimeout(DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .addNetworkInterceptor(netWorkInterceptor)
-                .addInterceptor(loggingInterceptor);
-
-        mRetrofitBuilder = new Retrofit.Builder();
-        mRetrofitBuilder.addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-                        .setLenient()
-                        .create()
-                ))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(mOkHttpClientBuilder.build())
-                .baseUrl(sBaseUrl);
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        sBaseUrl = baseUrl;
+        mOkHttpClientBuilder = OkHttpFactory.getInstance().getOkHttpClientBuilder();
+        mRetrofitBuilder = RetrofitFactory.getInstance().getRetrofitBuilder();
+        mRetrofitBuilder.client(mOkHttpClientBuilder.build())
+                        .baseUrl(sBaseUrl);
     }
 
     /**
      * 必须在全局Application先调用，获取context上下文，否则缓存无法使用
      */
-    public static void init(Application app,String baseUrl) {
+    protected static void init(Application app, String baseUrl) {
         sContext = app;
         sBaseUrl = baseUrl;
     }
@@ -123,18 +71,19 @@ public class Api {
     /**
      * 获取全局上下文
      */
-    public static Context getContext() {
+    public  Context getContext() {
         testInitialize();
         return sContext;
     }
 
-    private static void testInitialize() {
+    private  static void testInitialize() {
         if (sContext == null) {
-            throw new ExceptionInInitializerError("请先在全局Application中调用 XHttp.init() 初始化！");
+            throw new ExceptionInInitializerError("请先在全局Application中调用 ApiProxy.init() 初始化！");
         }
     }
 
     //==================设置Retrofit的OkHttpClient、ConverterFactory、CallAdapterFactory、CallbackExecutor、CallFactory=====================//
+
     /**
      * 对外暴露 Retrofit,方便自定义
      */

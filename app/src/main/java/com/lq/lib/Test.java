@@ -6,7 +6,12 @@ import android.support.annotation.NonNull;
 import android.widget.Button;
 
 import com.lq.lib.base.BaseActivity;
+import com.lq.lib.http.Api;
+import com.lq.lib.http.ApiProxy;
+import com.lq.lib.http.request.BaseHttpObserver;
+import com.lq.lib.http.request.BaseHttpResult;
 import com.lq.lib.http.update.AppUpdateManager;
+import com.lq.lib.test.ApiService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +46,14 @@ public class Test extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        ApiProxy.getInstance().call(ApiProxy.getService(ApiService.class).login(4))
+                                .subscribeWith(new BaseHttpObserver<BaseHttpResult>(this,
+                                        false,"") {
+                                    @Override
+                                    public void onHttpSuccess(BaseHttpResult result) {
 
+                                    }
+                                });
     }
 
     @OnClick(R.id.btn_start)

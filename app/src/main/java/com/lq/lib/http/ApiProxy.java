@@ -1,5 +1,7 @@
 package com.lq.lib.http;
 
+import android.app.Application;
+
 import com.lq.lib.http.request.BaseHttpResult;
 
 import io.reactivex.Observable;
@@ -8,6 +10,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * description:
+ * 提供给外部使用的类
  *
  * @author:mick
  * @time:2018/10/18
@@ -15,17 +18,28 @@ import io.reactivex.schedulers.Schedulers;
 public class ApiProxy {
     private static ApiProxy instance = null;
 
-    private ApiProxy(){}
+    private ApiProxy() {
+    }
 
     public static ApiProxy getInstance() {
         if (instance == null) {
-            synchronized (ApiProxy.class){
-                if (instance ==null) {
+            synchronized (ApiProxy.class) {
+                if (instance == null) {
                     instance = new ApiProxy();
                 }
             }
         }
         return instance;
+    }
+
+    /**
+     * 初始化
+     *
+     * @param app
+     * @param baseUrl
+     */
+    public static void init(Application app, String baseUrl) {
+        Api.init(app, baseUrl);
     }
 
     public static <T> T getService(Class<T> cls) {

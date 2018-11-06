@@ -14,5 +14,5 @@ import retrofit2.http.Query;
  */
 public interface ApiService {
     @GET("")
-    Observable<BaseHttpResult<Object>> login(@Query("start") int start);
+    Observable<BaseHttpResult> login(@Query("start") int start);
 }
