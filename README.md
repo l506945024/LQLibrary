@@ -1,4 +1,12 @@
 # LQLibrary 自用快速开发框架
+<br>
+        1.网络请求
+<br>
+        2.app下载更新
+<br>
+        3.吐司
+<br>
+        4.Activity/Fragment基类
 
 ### 网络请求实例
         ApiProxy.getInstance().call(ApiProxy.getService(ApiService.class).login(4))
