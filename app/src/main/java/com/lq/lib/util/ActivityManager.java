@@ -85,18 +85,6 @@ public class ActivityManager {
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-//此代码会抛出    异常
-//        for (Activity activity : activityStack) {
-//            if (activity.getClass().equals(cls)) {
-//                if (activity != null) {
-//                    activityStack.remove(activity);
-//                    activity.finish();
-//                    activity = null;
-//                }
-//            }
-//        }
-
-
         Iterator<Activity> iterator = activityStack.iterator();
         while (iterator.hasNext()) {
             Activity activity = iterator.next();
