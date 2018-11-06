@@ -1,8 +1,6 @@
-# LQLibrary
-自用快速开发框架
+# LQLibrary 自用快速开发框架
 
-
-网络请求实例:
+### 网络请求实例
         ApiProxy.getInstance().call(ApiProxy.getService(ApiService.class).login(4))
                 .subscribeWith(new BaseHttpObserver<BaseHttpResult<Object>>() {
                     @Override
@@ -10,7 +8,7 @@
 
                     }
                 });
-apk更新实例:
+### apk更新实例
   if (mUpdateManager == null) {
             mUpdateManager = new AppUpdateManager(this);
         }
