@@ -71,7 +71,7 @@ public class Api {
     /**
      * 获取全局上下文
      */
-    public  Context getContext() {
+    public static Context getContext() {
         testInitialize();
         return sContext;
     }

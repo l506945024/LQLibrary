@@ -46,7 +46,7 @@ public class ApiProxy {
         return Api.getRetrofitBuilder().build().create(cls);
     }
 
-    public <T> Observable<BaseHttpResult<T>> call(Observable<BaseHttpResult<T>> observable) {
+    public  Observable<BaseHttpResult> call(Observable<BaseHttpResult> observable) {
         return observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
