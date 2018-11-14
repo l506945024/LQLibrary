@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HomeBottomTabBar">
+        <attr name="titleMarginTop" format="dimension" />
+        <attr name="titleTextSize_sp" format="integer" />
+        <attr name="titleTextDefaultColor" format="color" />
+        <attr name="titleTextSelectColor" format="color" />
+        <attr name="iconWidth" format="dimension" />
+        <attr name="iconHeight" format="dimension" />
+    </declare-styleable>
+</resources>
