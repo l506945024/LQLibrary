@@ -23,8 +23,6 @@
                                    if (downId != 0) {
                                          mUpdateManager.clearCurrentTask(downId);
                                    }
-                                   downId = mUpdateManager.updateApkWifi(downUrl, "靓才", "更新中...");
-
                          ### 自定义dialog调用实例
                          
                                  if (mAkDialog == null) {
