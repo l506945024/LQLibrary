@@ -23,4 +23,16 @@
           if (downId != 0) {
                 mUpdateManager.clearCurrentTask(downId);
           }
-          downId = mUpdateManager.updateApkWifi(downUrl, "靓才", "更新中...");
+### 自定义dialog调用实例
+
+        if (mAkDialog == null) {
+            mAkDialog = new AkDialog.Builder(this, R.layout.activity_test)
+                    .setStyle(R.style.AkDialog)
+                    .setCancelTouchOutSide(true)
+                    .setTitle()
+                    .setMessage()
+                    .setViewText()
+                    .addOnBtnClickListener()
+                    .build();
+        }
+        mAkDialog.show();
