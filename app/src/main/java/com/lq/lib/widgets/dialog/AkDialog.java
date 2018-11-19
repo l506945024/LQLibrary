@@ -2,10 +2,12 @@ package com.lq.lib.widgets.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -73,7 +75,8 @@ public class AkDialog extends Dialog {
         private int styleResId;
         private String title;
         private String message;
-        AkDialog akDialog;
+        private AkDialog akDialog;
+        private boolean autoShow;
 
         public Builder(Context context, @LayoutRes int layoutResId) {
             this.context = context;
@@ -86,6 +89,11 @@ public class AkDialog extends Dialog {
             return this;
         }
 
+
+        public Builder setAutoShow(boolean autoShow) {
+            this.autoShow = autoShow;
+            return this;
+        }
 
         public Builder setCancelTouchOutSide(boolean cancelTouchOutSide) {
             this.cancelTouchOutSide = cancelTouchOutSide;

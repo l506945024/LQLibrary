@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.lq.lib.base.BaseActivity;
 import com.lq.lib.http.update.AppUpdateManager;
+import com.lq.lib.util.AkDialogUtils;
 import com.lq.lib.widgets.dialog.AkDialog;
 
 import butterknife.BindView;
@@ -22,7 +23,6 @@ public class Test extends BaseActivity {
     AppUpdateManager mUpdateManager;
     long downId;
 
-    AkDialog mAkDialog;
 
     String downUrl = "http://192.168.88.199:8000/smartcenter/temp/201810/5c8c8b42-78cd-41d7-ad5d-0243ef4dcfda.apk";
 
@@ -55,16 +55,10 @@ public class Test extends BaseActivity {
 
     @OnClick(R.id.btn_start)
     public void onViewClicked() {
-//        showToastShort("这是社么东西");
-//        TestPermissionsDispatcher.startDownApkWithPermissionCheck(this);
+        showToastShort("这是社么东西");
+        TestPermissionsDispatcher.startDownApkWithPermissionCheck(this);
 
-        if (mAkDialog == null) {
-            mAkDialog = new AkDialog.Builder(this, R.layout.activity_test)
-                    .setStyle(R.style.AkDialog)
-                    .setCancelTouchOutSide(true)
-                    .build();
-        }
-        mAkDialog.show();
+
     }
 
     @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
