@@ -120,7 +120,7 @@ public class AkDialog extends Dialog {
             return this;
         }
 
-        public Builder addOnBtnClickListener(@IdRes int resId, String btnText, View.OnClickListener onClickListener) {
+        public Builder addBtnOnClickListener(@IdRes int resId, String btnText, View.OnClickListener onClickListener) {
             return setViewText(resId, btnText, onClickListener);
         }
 
