@@ -2,6 +2,7 @@ package com.lq.lib.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import butterknife.Unbinder;
  * @time:2018/10/18
  */
 public abstract class BaseFragment extends Fragment {
+    private static final String SKIP_FLAG = "bundle";
 
     public View mContentView;
     public Context mContext;
@@ -70,7 +72,7 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     @LayoutRes
-    public abstract int getLayoutResId();
+    protected abstract int getLayoutResId();
 
     /**
      * 初始化控件
@@ -78,14 +80,16 @@ public abstract class BaseFragment extends Fragment {
      * @param contentView
      * @param savedInstanceState
      */
-    public abstract void initView(View contentView, Bundle savedInstanceState);
+    protected abstract void initView(View contentView, Bundle savedInstanceState);
 
     /**
      * 初始化数据
      *
      * @param savedInstanceState
      */
-    public abstract void initData(Bundle savedInstanceState);
+    @SuppressWarnings("unused")
+    protected void initData(Bundle savedInstanceState) {
+    }
 
     //===============初始化结束====================//
 
@@ -94,6 +98,7 @@ public abstract class BaseFragment extends Fragment {
      *
      * @return
      */
+    @Deprecated
     public BaseActivity safeGetActivity() {
         if (mContext instanceof BaseActivity) {
             BaseActivity baseActivity = (BaseActivity) mContext;
@@ -104,5 +109,28 @@ public abstract class BaseFragment extends Fragment {
             }
         }
         return null;
+    }
+
+    //===============跳转页面====================//
+
+    /**
+     * 简单跳转
+     *
+     * @param cls
+     */
+    protected void skipToPage(Class<?> cls) {
+        mContext.startActivity(new Intent(mContext, cls));
+    }
+
+    /**
+     * 传参数的跳转
+     *
+     * @param cls
+     * @param bundle
+     */
+    protected void skipToPageWithBundle(Class<?> cls, Bundle bundle) {
+        Intent intent = new Intent(mContext, cls);
+        intent.putExtra(SKIP_FLAG, bundle);
+        mContext.startActivity(intent);
     }
 }

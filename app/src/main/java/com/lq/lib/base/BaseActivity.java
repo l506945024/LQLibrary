@@ -55,21 +55,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化标题栏
      */
-    public abstract void initTitleBar(Bundle savedInstanceState);
+    public  void initTitleBar(Bundle savedInstanceState){}
 
     /**
      * 控件初始化
      *
      * @param savedInstanceState
      */
-    public abstract void initView(Bundle savedInstanceState);
+    public  void initView(Bundle savedInstanceState){}
 
     /**
      * 数据初始化
      *
      * @param savedInstanceState
      */
-    public abstract void initData(Bundle savedInstanceState);
+    public  void initData(Bundle savedInstanceState){}
 
     //=========================初始化结束=========================//
 

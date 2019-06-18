@@ -57,8 +57,6 @@ public class Test extends BaseActivity {
     public void onViewClicked() {
         showToastShort("这是社么东西");
         TestPermissionsDispatcher.startDownApkWithPermissionCheck(this);
-
-
     }
 
     @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
